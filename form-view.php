@@ -29,7 +29,28 @@
         </ul>
     </nav>
     */ ?>
-        <form method="post" action='index.php'>
+        <!-- form submission $formSubmitted-->
+        <!-- show this if order button is already clicked -->
+        <!-- show chosen products and delivery address -->
+        <?php if (!empty($_POST)) { ?>
+
+            <div class="alert alert-<?= $result['success'] ? 'success' : 'danger' ?>" role="alert">
+                <?php if (!empty($_POST)) { ?>
+                    Ok!
+                <?php } else { ?>
+                    Please check your fields, there is a problem
+                <?php } ?>
+
+                <br>
+                <!-- display ordered products -->
+
+                <br>
+                <p>Delivery Address:</p>
+                <?= deliveryAddress() ?>
+            </div>
+        <?php } ?>
+
+        <form method="post" action=''>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">E-mail:</label>
@@ -72,9 +93,11 @@
                         <input type="checkbox" value="1" name="products[<?php echo $i ?>]" /> <?php echo $product['name'] ?> -
                         &euro; <?= number_format($product['price'], 2) ?></label><br />
                 <?php endforeach; ?>
+
+
             </fieldset>
 
-            <button type="submit" class="btn btn-primary">Order!</button>
+            <button type="submit" class="btn btn-primary" name='order'>Order!</button>
         </form>
 
         <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>

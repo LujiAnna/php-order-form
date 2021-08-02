@@ -4,7 +4,7 @@
 
 ### Preparation
 
-- View the provided structure: you get both an index file and another file containing a form. `How are these two working together?` In form-view form => Add attribute action='index.php'
+- View the provided structure: you get both an index file and another file containing a form. `How are these two working together?` In form-view form => require 'form-view.php'; in index.php
 - Think of a funny / surprising / original name for a store that should definitely exist. => Video Call Gears
 - Think of some products to sell (feel free to be creative) and update the products array with these. => Video Call Gears
 - Check if all the products & prices are currently visible in the form. => Create Array of arrays
