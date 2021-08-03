@@ -38,9 +38,13 @@ $products = [
     ['name' => 'Video editing software: Adobe Premiere Elements 2021', 'price' => 39.99],
 ];
 
+// ADD another product array, eg cameras only, or microphones only
+
 print_r($products);
 
 $totalValue = 0;
+
+
 
 // Completed: step1:Show an order confirmation when the user submits the form.
 // TODO:  This should contain the chosen products
@@ -95,61 +99,83 @@ function deliveryAddress()
     }
 }
 
-
+// This function will return a list/array of invalid fields back in form 
 function validate()
 {
+    $email = $_POST['email'];
+    $street = $_POST['street'];
+    $streetnumber = $_POST['streetnumber'];
+    $city = $_POST['city'];
+    $zipcode = $_POST['zipcode'];
 
     /**
      * 1. Does it exist? or has it been submitted?
      * 2. Is it empty? or does 'value === NULL'?
      * 3. Display back to user => (Handle form)
      */
-    // does it exist
-    if (isset($_POST['email']) && isset($_POST['street']) && isset($_POST['streetnumber']) && isset($_POST['city']) && isset($_POST['zipcode'])) {
-        // return 'OK';
-        $email = $_POST['email'];
-        $street = $_POST['street'];
-        $streetnumber = $_POST['streetnumber'];
-        $city = $_POST['city'];
-        $zipcode = $_POST['zipcode'];
 
-        // is it empty
-        if (!empty($email) && !empty($street) && !empty($streetnumber) && !empty($city) && !empty($zipcode)) {
-            return true;
-        } else {
-            return false;
-        }
+    $emptyField = [];
 
-        return [
-            'success' => true,
-            'errors' => ['email']
-        ];
-    }
-
-    return false;
-
+    // $address_data += [$key => $value];
+    // check for required empty fields 
+    // remove string, and push variable: $email, value => 'email'
     // This function will send a list of invalid fields back
-    // TODO: check for empty fields 
-    // if (empty($_POST['email'])) {
-    //     return 'please fill your email address';
-    //     // return [];
-    // }
+
+    if (empty($_POST['email'])) {
+        $emptyField[] = 'email';
+    }
+    if (empty($_POST['street'])) {
+        $emptyField[] = 'street';
+    }
+    if (empty($_POST['streetnumber'])) {
+        $emptyField[] = 'streetnumber';
+    }
+    if (empty($_POST['city'])) {
+        $emptyField[] = 'city';
+    }
+    if (empty($_POST['zipcode'])) {
+        $emptyField[] = 'zipcode';
+    }
+    // TODO: Add sessions
+    // TODO: include empty strings to all values when empty
+    return $emptyField;
 }
 
-function handleForm()
+function handleForm($products)
+//     & changes the original value
 {
-    // return 'form submitted successfully!';
-    // return $products; //why undefined? use 'global' inside a function
-    return validate();
-    // TODO: form related tasks (step 1)
     // Validation (step 2)
-    // $invalidFields = validate();
-    // if (!empty($invalidFields)) {
+    $invalidFields = validate();
+    if (!empty($invalidFields)) {
+        $message = '';
+        foreach ($invalidFields as $invalidField) {
+            $message .= "Please provide your {$invalidField}.";
+            $message .= '<br>';
+        }
+        return [
+            'errors' => true,
+            'message' => $message
+        ];
+    } else {
+        // try oksana code here as well
+        $productNumbers = array_keys($_POST['products']);
+        $productNames = [];
 
-    //     // TODO: handle errors
-    // } else {
-    //     // return $invalidFields;
-    // }
+        foreach ($productNumbers as $productNumber) {
+            $productNames[] = $products[$productNumber]['name'];
+        }
+
+        $message = 'Your order is : ' . implode(', ', $productNames);
+        $message .= '<br>';
+        $message .= '<br>';
+        $message .= 'Your address : ' . $_POST['street'] . ' ' . $_POST['streetnumber'] . ', ' . $_POST['zipcode'] . ' ' . $_POST['city'];
+
+
+        return [
+            'errors' => false,
+            'message' => $message
+        ];
+    }
 }
 
 // Check order sent
@@ -159,8 +185,11 @@ function handleForm()
 // $formSubmitted = false;
 // isset() method in PHP to test the form is submitted successfully or not
 $formSubmitted = isset($_POST['order']);
+$result = [];
+
 if ($formSubmitted) {
-    $result = handleForm();
+    $result = handleForm($products);
+    // this will either return address & products or a list of arrays
 }
 
 require 'form-view.php';

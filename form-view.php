@@ -18,6 +18,9 @@
         <?php // Navigation for when you need it 
         ?>
         <?php /*
+
+        // navigation trhough products url usoing GET
+        // then switch this also in index
     <nav>
         <ul class="nav">
             <li class="nav-item">
@@ -32,23 +35,18 @@
         <!-- form submission $formSubmitted-->
         <!-- show this if order button is already clicked -->
         <!-- show chosen products and delivery address -->
-        <?php if (!empty($_POST)) { ?>
 
-            <div class="alert alert-<?= $result['success'] ? 'success' : 'danger' ?>" role="alert">
-                <?php if (!empty($_POST)) { ?>
-                    Ok!
-                <?php } else { ?>
-                    Please check your fields, there is a problem
-                <?php } ?>
-
-                <br>
-                <!-- display ordered products -->
-
-                <br>
-                <p>Delivery Address:</p>
-                <?= deliveryAddress() ?>
+        <!-- display message that the purchase is successful-->
+        <?php if (!empty($result['message'])) { ?>
+            <div class="alert <?php if ($result['errors']) {
+                                    echo 'alert-danger';
+                                } else {
+                                    echo 'alert-success';
+                                } ?>">
+                <?= $result['message'] ?>
             </div>
-        <?php } ?>
+        <?php }; ?>
+
 
         <form method="post" action=''>
             <div class="form-row">
