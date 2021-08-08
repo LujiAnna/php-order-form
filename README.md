@@ -21,14 +21,14 @@
   - [!] Zip code are only numbers.
   - [*] Email address is valid.
 - [x] Show any problems (empty or invalid data) with the fields at the top of the form. Tip: use the [bootstrap alerts](https://getbootstrap.com/docs/4.0/components/alerts/) for inspiration. If they are valid, the confirmation of step 1 is shown.
-- [?] If the form was not valid, show the previous values in the form so that the user doesn't have to retype everything.
+- [x] If the form was not valid, show the previous values in the form so that the user doesn't have to retype everything.
 
 > Usually, validation is a combination of server side checks (for security, these can't be bypassed) and checks in html / JS (can be bypassed but can give live user feedback).
 
 ### Step 3: improve UX by saving user data
 
 - [x] Check out the possibilities of the PHP session and cookies.
-- [?] We want to prefill the address (after the first usage), as long as the browser isn't closed. Which of these techniques is the better choice here? Session
+- [x] We want to prefill the address (after the first usage), as long as the browser isn't closed. Which of these techniques is the better choice here? Session
 
 > When using cookies on a live site, check any legal requirements.
 
