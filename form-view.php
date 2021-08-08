@@ -22,10 +22,10 @@
     <nav>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="index.php?order=gear">Video Gears</a>
+                <a class="nav-link ' . ($order == 'gear' ? 'btn btn-info' : "")  .' " href="index.php?order=gear">Video Gears</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?order=play">Play Gears</a>
+                <a class="nav-link ' . ($order == 'play' ? 'btn btn-info' : "")  .' " href="index.php?order=play">Play Gears</a>
             </li>
         </ul>
     </nav>
@@ -80,14 +80,13 @@
             <fieldset>
                 <legend>Products</legend>
 <!-- if video gears clicked, then show $gears, etc. change $products into $$order -->
-
                 <?php foreach ( ${$order} as $i => $product) : ?>
                     <label>
                         <?php // <?p= is equal to <?php echo 
                         ?>
                         <input type="checkbox" value="1" 
                         name="products[<?php echo $i ?>]" 
-                        <?php echo isset($_POST['products'][$i]) ? 'checked ':''; ?>
+                        <?php echo isset($_POST['products'][$i]) ? 'checked ':''; ?> 
                         /> 
                         <?php echo $product['name'] ?> - &euro; <?= number_format($product['price'], 2) ?>
                         </label>

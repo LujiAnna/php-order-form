@@ -27,8 +27,8 @@
 
 ### Step 3: improve UX by saving user data
 
-- Check out the possibilities of the PHP session and cookies.
-- We want to prefill the address (after the first usage), as long as the browser isn't closed. Which of these techniques is the better choice here? Session
+- [x] Check out the possibilities of the PHP session and cookies.
+- [?] We want to prefill the address (after the first usage), as long as the browser isn't closed. Which of these techniques is the better choice here? Session
 
 > When using cookies on a live site, check any legal requirements.
 
