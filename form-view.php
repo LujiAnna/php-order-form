@@ -9,33 +9,29 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <title>Video Call Gears</title>
+    <title>Play & Gear</title>
 </head>
 
 <body>
     <div class="container">
         <h1>Place your order</h1>
-        <?php // Navigation for when you need it 
+        <?php // Navigation trhough products url usoing GET. then switch this also in index
         ?>
-        <?php /*
-
-        // navigation trhough products url usoing GET
-        // then switch this also in index
+        <!-- To show html add echo with '' quotes -->
+        <?php echo '
     <nav>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="?food=1">Order food</a>
+                <a class="nav-link active" href="index.php?order=gear">Video Gears</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?food=0">Order drinks</a>
+                <a class="nav-link" href="index.php?order=play">Play Gears</a>
             </li>
         </ul>
     </nav>
-    */ ?>
-        <!-- form submission $formSubmitted-->
-        <!-- show this if order button is already clicked -->
+    '
+     ?>
         <!-- show chosen products and delivery address -->
-
         <!-- display message that the purchase is successful-->
         <?php if (!empty($result['message'])) { ?>
             <div class="alert <?php if ($result['errors']) {
@@ -46,7 +42,6 @@
                 <?= $result['message'] ?>
             </div>
         <?php }; ?>
-
 
         <form method="post" action=''>
             <div class="form-row">
@@ -84,14 +79,20 @@
 
             <fieldset>
                 <legend>Products</legend>
-                <?php foreach ($products as $i => $product) : ?>
+<!-- if video gears clicked, then show $gears, etc. change $products into $$order -->
+
+                <?php foreach ( ${$order} as $i => $product) : ?>
                     <label>
                         <?php // <?p= is equal to <?php echo 
                         ?>
-                        <input type="checkbox" value="1" name="products[<?php echo $i ?>]" /> <?php echo $product['name'] ?> -
-                        &euro; <?= number_format($product['price'], 2) ?></label><br />
+                        <input type="checkbox" value="1" 
+                        name="products[<?php echo $i ?>]" 
+                        <?php echo isset($_POST['products'][$i]) ? 'checked ':''; ?>
+                        /> 
+                        <?php echo $product['name'] ?> - &euro; <?= number_format($product['price'], 2) ?>
+                        </label>
+                        <br />
                 <?php endforeach; ?>
-
 
             </fieldset>
 
