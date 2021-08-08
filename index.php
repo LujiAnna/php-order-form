@@ -31,7 +31,7 @@ function whatIsHappening()
     var_dump($_SESSION);
 }
 
-whatIsHappening();
+// whatIsHappening();
 
 // provide some products using an Associative Array
 $gear = [
