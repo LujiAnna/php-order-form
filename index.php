@@ -57,18 +57,6 @@ $play = [
 
 $totalValue = 0;
 
-
-
-// show all orders in a form
-// iterate through the order
-// save the checked products in cookies and grab them from there
-// We want to prefill the address (after the first usage), as long as the browser isn't closed. 
-// retrieve html form data
-
-// 2, 4, 5 orders display
-//  ["products"]=> array(3) { [1]=> string(1) "1" [3]=> string(1) "1" [4]=> string(1) "1" } ["order"]=> string(0) "" }
-
-// Delivery address
 function deliveryAddress()
 {
     if (isset($_POST['street'])) {
@@ -88,10 +76,7 @@ function validate()
      */
 
     $emptyField = [];
-
-    // $address_data += [$key => $value];
     // check for required empty fields 
-    // remove string, and push variable: $email, value => 'email'
     // This function will send a list of invalid fields back
 
     if (empty($_POST['email'])) {
@@ -113,7 +98,6 @@ function validate()
         $emptyField[] = 'products';
     }
     
-    // Add sessions
    $_SESSION['email'] = $_POST['email'];
    $_SESSION['street']  = $_POST['street'];
    $_SESSION['streetnumber']  = $_POST['streetnumber'];
@@ -126,7 +110,6 @@ function validate()
 }
 
 function handleForm($products, &$totalValue)
-//     & changes the original value
 {
     // Validation (step 2)
     $invalidFields = validate();
@@ -137,7 +120,6 @@ function handleForm($products, &$totalValue)
             $message .= '<br>';
         }
         // TODO: show the previous values in the form so that the user doesn't have to retype everything
-        
         return [
             'errors' => true,
             'message' => $message
@@ -169,7 +151,6 @@ function handleForm($products, &$totalValue)
 // handle successful submission
 // return "order will be set if the form has been submitted (to TRUE)";
 
-// $formSubmitted = false;
 // isset() method in PHP to test the form is submitted successfully or not
 $formSubmitted = isset($_POST['order']);
 $result = [];
